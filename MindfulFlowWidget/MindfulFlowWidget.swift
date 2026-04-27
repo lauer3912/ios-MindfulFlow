@@ -35,6 +35,13 @@ struct MindfulFlowWidgetEntryView: View {
     @Environment(\.widgetFamily) var family
 
     var body: some View {
+        contentView
+            .padding()
+            .containerBackground(Color(UIColor.systemBackground), for: .widget)
+    }
+
+    @ViewBuilder
+    private var contentView: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: "brain.head.profile")
@@ -68,21 +75,6 @@ struct MindfulFlowWidgetEntryView: View {
                 Text("\(entry.streak) day streak")
                     .font(.caption)
             }
-        }
-        .padding()
-        .if #available(iOS 17.0, *) {
-            containerBackground(Color(UIColor.systemBackground), for: .widget)
-        }
-    }
-}
-
-extension View {
-    @ViewBuilder
-    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
-        if condition {
-            transform(self)
-        } else {
-            self
         }
     }
 }
