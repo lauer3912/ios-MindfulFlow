@@ -1,0 +1,138 @@
+name: MindfulFlow
+options:
+  bundleIdPrefix: com.ggsheng
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: 9L6N2ZF26B
+    ENABLE_PREVIEWS: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+
+targets:
+  MindfulFlow:
+    type: application
+    platform: iOS
+    sources:
+      - path: MindfulFlow
+        excludes:
+          - "**/.DS_Store"
+    resources:
+      - path: MindfulFlow/Assets.xcassets
+    settings:
+      base:
+        INFOPLIST_FILE: MindfulFlow/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.MindfulFlow
+        PRODUCT_NAME: MindfulFlow
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        GENERATE_INFOPLIST_FILE: NO
+        SWIFT_EMIT_LOC_STRINGS: YES
+        CODE_SIGN_ENTITLEMENTS: MindfulFlow/MindfulFlow.entitlements
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 9L6N2ZF26B
+        TARGETED_DEVICE_FAMILY: "1,2"
+        CODE_SIGNING_ALLOWED: YES
+      configs:
+        Debug:
+          CODE_SIGNING_ALLOWED: NO
+        Release:
+          CODE_SIGNING_ALLOWED: YES
+    entitlements:
+      path: MindfulFlow/MindfulFlow.entitlements
+    dependencies:
+      - target: MindfulFlowWidget
+        embed: true
+
+  MindfulFlowWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: MindfulFlowWidget
+        excludes:
+          - "**/.DS_Store"
+    settings:
+      base:
+        INFOPLIST_FILE: MindfulFlowWidget/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.MindfulFlow.widget
+        PRODUCT_NAME: MindfulFlowWidget
+        GENERATE_INFOPLIST_FILE: NO
+        SWIFT_EMIT_LOC_STRINGS: YES
+        CODE_SIGN_ENTITLEMENTS: MindfulFlowWidget/MindfulFlowWidget.entitlements
+        CODE_SIGNING_ALLOWED: NO
+        DEVELOPMENT_TEAM: 9L6N2ZF26B
+        SKIP_INSTALL: YES
+        LD_RUNPATH_SEARCH_PATHS:
+          - "$(inherited)"
+          - "@executable_path/Frameworks"
+          - "@executable_path/../../Frameworks"
+      configs:
+        Debug:
+          CODE_SIGNING_ALLOWED: NO
+        Release:
+          CODE_SIGNING_ALLOWED: YES
+    entitlements:
+      path: MindfulFlowWidget/MindfulFlowWidget.entitlements
+
+  MindfulFlowTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: MindfulFlowTests
+        excludes:
+          - "**/.DS_Store"
+    dependencies:
+      - target: MindfulFlow
+    settings:
+      base:
+        INFOPLIST_FILE: MindfulFlowTests/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.MindfulFlowTests
+        PRODUCT_NAME: MindfulFlowTests
+        GENERATE_INFOPLIST_FILE: NO
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/MindfulFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MindfulFlow"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 9L6N2ZF26B
+
+  MindfulFlowUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: MindfulFlowUITests
+        excludes:
+          - "**/.DS_Store"
+    dependencies:
+      - target: MindfulFlow
+    settings:
+      base:
+        INFOPLIST_FILE: MindfulFlowUITests/Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.ggsheng.MindfulFlowUITests
+        PRODUCT_NAME: MindfulFlowUITests
+        GENERATE_INFOPLIST_FILE: NO
+        TEST_TARGET: "$(BUILT_PRODUCTS_DIR)/MindfulFlow.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MindfulFlow"
+        CODE_SIGN_ENTITLEMENTS: ""
+        CODE_SIGN_STYLE: Automatic
+        DEVELOPMENT_TEAM: 9L6N2ZF26B
+
+schemes:
+  MindfulFlow:
+    build:
+      targets:
+        MindfulFlow: all
+        MindfulFlowWidget: all
+        MindfulFlowUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - MindfulFlowUITests
+    archive:
+      config: Release
