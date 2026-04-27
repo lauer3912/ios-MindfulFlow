@@ -65,10 +65,12 @@ targets:
         PRODUCT_NAME: MindfulFlowWidget
         GENERATE_INFOPLIST_FILE: NO
         SWIFT_EMIT_LOC_STRINGS: YES
+        CODE_SIGN_STYLE: Automatic
         CODE_SIGN_ENTITLEMENTS: MindfulFlowWidget/MindfulFlowWidget.entitlements
-        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_ALLOWED: YES
         DEVELOPMENT_TEAM: 9L6N2ZF26B
         SKIP_INSTALL: YES
+        TARGETED_DEVICE_FAMILY: "1,2"
         LD_RUNPATH_SEARCH_PATHS:
           - "$(inherited)"
           - "@executable_path/Frameworks"
